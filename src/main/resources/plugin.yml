@@ -1,0 +1,5 @@
+name: TacticalHud
+version: '1.0'
+main: me.bestnuts.th.TacticalHud
+api-version: '1.21'
+softdepend: ["PlaceholderAPI"]
