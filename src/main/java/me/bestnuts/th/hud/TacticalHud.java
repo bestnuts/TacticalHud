@@ -28,7 +28,9 @@ public class TacticalHud {
         if (tick <= 0) {
             tick = interval;
             if (ConditionParser.parsing(tacticalPlayer.getPlayer(), condition))
-                hudObject.modifyComponent();
+                hudObject.create();
+            else
+                hudObject.remove();
         }
     }
 

@@ -37,6 +37,7 @@ public class EntityHandler {
 
     public void removeEntity(ServerPlayer player, Entity entity) {
         player.connection.send(new ClientboundRemoveEntitiesPacket(entity.getId()));
+        entity.remove(Entity.RemovalReason.DISCARDED);
     }
 
     public void mountEntityOnPlayer(ServerPlayer player, Entity entity) {
