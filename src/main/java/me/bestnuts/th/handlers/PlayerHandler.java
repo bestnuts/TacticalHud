@@ -66,7 +66,8 @@ public class PlayerHandler {
         HudComponent component = new HudComponent(
                 TextDisplay.TextAlignment.valueOf(componentSection.getString("alignment", "CENTER").toUpperCase()),
                 Color.fromARGB(colorList.get(0), colorList.get(1), colorList.get(2), colorList.get(3)),
-                componentSection.getString("text"),
+                componentSection.getString("text", ""),
+                componentSection.getString("font", "minecraft:default"),
                 componentSection.getInt("lineWidth", 0),
                 componentSection.getBoolean("textShadow", false)
         );
