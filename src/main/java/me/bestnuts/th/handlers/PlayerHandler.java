@@ -95,7 +95,7 @@ public class PlayerHandler {
             );
         }
 
-        return new TacticalHud(interval, condition,
+        return new TacticalHud(tacticalPlayer, interval, condition,
                 new HudObject(component, transform, new HudEntity(tacticalPlayer))
                 );
     }
