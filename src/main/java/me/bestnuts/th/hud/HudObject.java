@@ -22,6 +22,13 @@ public record HudObject(HudComponent hudComponent, HudTransform hudTransform, Hu
         modifyAll();
     }
 
+    public void remove() {
+        EntityHandler handler = TacticalHudPlugin.getInstance().getTacticalHandler().getEntityHandler();
+        if (hudEntity.isEntityInValid())
+            return;
+        handler.removeEntity(hudEntity.getPlayer(), hudEntity.getEntity());
+    }
+
     public void modifyAll() {
         EntityHandler handler = TacticalHudPlugin.getInstance().getTacticalHandler().getEntityHandler();
 

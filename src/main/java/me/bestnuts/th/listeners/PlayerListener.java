@@ -23,7 +23,7 @@ public class PlayerListener implements Listener {
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) {
         Player player = event.getPlayer();
-        TacticalHudPlugin.removeTacticalPlayer(player);
+        TacticalHudPlugin.removeTacticalPlayer(player).hudUpdate(t -> t.getHudObject().remove());
     }
 
     @EventHandler

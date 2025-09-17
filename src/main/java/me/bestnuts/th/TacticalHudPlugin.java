@@ -43,10 +43,7 @@ public final class TacticalHudPlugin extends JavaPlugin {
         HandlerList.unregisterAll(this);
 
         for (TacticalPlayer tacticalPlayer : tacticalPlayerMap.values()) {
-            tacticalPlayer.hudUpdate(t -> {
-                HudEntity hudEntity = t.getHudObject().hudEntity();
-                tacticalHandler.getEntityHandler().removeEntity(hudEntity.getPlayer(), hudEntity.getEntity());
-            });
+            tacticalPlayer.hudUpdate(t -> t.getHudObject().remove());
         }
 
         tacticalPlayerMap.clear();
@@ -84,7 +81,7 @@ public final class TacticalHudPlugin extends JavaPlugin {
         return tacticalPlayer;
     }
 
-    public static void removeTacticalPlayer(Player player) {
-        plugin.tacticalPlayerMap.remove(player);
+    public static TacticalPlayer removeTacticalPlayer(Player player) {
+        return plugin.tacticalPlayerMap.remove(player);
     }
 }
