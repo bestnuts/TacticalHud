@@ -16,8 +16,8 @@ public record HudObject(HudComponent hudComponent, HudTransform hudTransform, Hu
         EntityHandler handler = TacticalHudPlugin.getInstance().getTacticalHandler().getEntityHandler();
         if (hudEntity.isEntityInValid()) {
             hudEntity.createEntity();
-            handler.mountEntityOnPlayer(hudEntity.getPlayer(), hudEntity.getEntity());
             handler.sendAddEntity(hudEntity.getPlayer(), hudEntity.getEntity());
+            mount();
         }
         modifyAll();
     }
@@ -29,6 +29,11 @@ public record HudObject(HudComponent hudComponent, HudTransform hudTransform, Hu
         modifyTransform();
 
         handler.updateEntityData(hudEntity.getPlayer(), hudEntity.getEntity());
+    }
+
+    public void mount() {
+        EntityHandler handler = TacticalHudPlugin.getInstance().getTacticalHandler().getEntityHandler();
+        handler.mountEntityOnPlayer(hudEntity.getPlayer(), hudEntity.getEntity());
     }
 
     public void modifyComponent() {

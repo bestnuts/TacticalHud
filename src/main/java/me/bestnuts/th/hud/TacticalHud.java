@@ -27,6 +27,11 @@ public class TacticalHud {
         }
     }
 
+    public void forceUpdate() {
+        hudObject.modifyComponent();
+        hudObject.mount();
+    }
+
     public int getInterval() {
         return interval;
     }

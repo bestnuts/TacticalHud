@@ -8,6 +8,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Consumer;
 
 public class TacticalPlayer extends BukkitRunnable {
 
@@ -34,9 +35,11 @@ public class TacticalPlayer extends BukkitRunnable {
     public void run() {
         if (tacticalHudMap.isEmpty())
             return;
-        for (TacticalHud tacticalHud : tacticalHudMap.values()) {
-            tacticalHud.update();
-        }
+        hudUpdate(TacticalHud::update);
+    }
+
+    public void hudUpdate(Consumer<TacticalHud> consumer) {
+        consumer.accept(tacticalHudMap.values().iterator().next());
     }
 
     public Player getPlayer() {
