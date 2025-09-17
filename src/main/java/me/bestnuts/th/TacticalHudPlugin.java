@@ -1,6 +1,7 @@
 package me.bestnuts.th;
 
 import me.bestnuts.th.handlers.TacticalHandler;
+import me.bestnuts.th.hud.HudEntity;
 import me.bestnuts.th.listeners.PlayerListener;
 import me.bestnuts.th.player.TacticalPlayer;
 import org.bukkit.Bukkit;
@@ -40,6 +41,14 @@ public final class TacticalHudPlugin extends JavaPlugin {
     @Override
     public void onDisable() {
         HandlerList.unregisterAll(this);
+
+        for (TacticalPlayer tacticalPlayer : tacticalPlayerMap.values()) {
+            tacticalPlayer.hudUpdate(t -> {
+                HudEntity hudEntity = t.getHudObject().hudEntity();
+                tacticalHandler.getEntityHandler().removeEntity(hudEntity.getPlayer(), hudEntity.getEntity());
+            });
+        }
+
         tacticalPlayerMap.clear();
         tacticalPlayerMap = null;
         tacticalHandler = null;

@@ -37,7 +37,7 @@ public record HudObject(HudComponent hudComponent, HudTransform hudTransform, Hu
     }
 
     public void modifyComponent() {
-        hudComponent.modify(hudEntity.getBukkitEntity());
+        hudComponent.modify(hudEntity.getBukkitEntity(), hudEntity.getBukkitPlayer());
     }
 
     public void modifyTransform() {
