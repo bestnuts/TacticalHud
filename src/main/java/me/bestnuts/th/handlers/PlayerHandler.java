@@ -1,6 +1,7 @@
 package me.bestnuts.th.handlers;
 
 import me.bestnuts.th.TacticalHudPlugin;
+import me.bestnuts.th.exceptions.NotFoundSubSectionElement;
 import me.bestnuts.th.hud.*;
 import me.bestnuts.th.player.TacticalPlayer;
 import me.bestnuts.th.util.YamlConfigurationFactory;
@@ -9,7 +10,6 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.TextDisplay;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.joml.AxisAngle4f;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
@@ -19,7 +19,7 @@ import java.util.List;
 public class PlayerHandler {
 
     public void createHud(@NotNull TacticalPlayer tacticalPlayer) {
-        createHud(tacticalPlayer, YamlConfigurationFactory.getConfiguration("hud/default-hud"));
+        createHud(tacticalPlayer, YamlConfigurationFactory.getConfiguration("hud/default"));
     }
 
     public void createHud(@NotNull TacticalPlayer tacticalPlayer, @NotNull FileConfiguration configuration) {
@@ -34,10 +34,10 @@ public class PlayerHandler {
                 int index = Integer.parseInt(key);
 
                 ConfigurationSection subSection = section.getConfigurationSection(key);
-                if (subSection == null) continue;
+                if (subSection == null) throw new NotFoundSubSectionElement("subSection");
 
                 String displayPath = subSection.getString("path");
-                if (displayPath == null) continue;
+                if (displayPath == null) throw new NotFoundSubSectionElement("path");
 
                 FileConfiguration displayConfiguration = YamlConfigurationFactory.getConfiguration(displayPath);
 
@@ -45,19 +45,20 @@ public class PlayerHandler {
                 String condition = subSection.getString("condition", "true");
 
                 TacticalHud tacticalHud = createHud(tacticalPlayer, displayConfiguration, interval, condition);
-                if (tacticalHud == null) continue;
 
                 tacticalPlayer.putTacticalHud(index, tacticalHud);
-            } catch (NumberFormatException e) {
+            } catch (NumberFormatException exception) {
                 TacticalHudPlugin.getInstance().getLogger().warning("Hud 섹션 키가 숫자가 아닙니다. " + key);
+            } catch (NotFoundSubSectionElement exception) {
+                exception.printStackTrace();
             }
         }
     }
 
-    private @Nullable TacticalHud createHud(@NotNull TacticalPlayer tacticalPlayer, @NotNull FileConfiguration configuration, int interval, String condition) {
+    private @NotNull TacticalHud createHud(@NotNull TacticalPlayer tacticalPlayer, @NotNull FileConfiguration configuration, int interval, String condition) throws NotFoundSubSectionElement {
         ConfigurationSection componentSection = configuration.getConfigurationSection("component");
         ConfigurationSection transformSection = configuration.getConfigurationSection("transform");
-        if (componentSection == null) return null;
+        if (componentSection == null) throw new NotFoundSubSectionElement("component");
 
         List<Integer> colorList = componentSection.getIntegerList("backgroundColor");
         if (colorList.size() != 4) colorList = List.of(0, 0, 0, 0);

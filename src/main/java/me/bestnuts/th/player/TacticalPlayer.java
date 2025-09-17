@@ -33,12 +33,16 @@ public class TacticalPlayer extends BukkitRunnable {
 
     @Override
     public void run() {
+        if (!player.isOnline())
+            cancel();
         if (tacticalHudMap.isEmpty())
             return;
         hudUpdate(TacticalHud::update);
     }
 
     public void hudUpdate(Consumer<TacticalHud> consumer) {
+        if (tacticalHudMap.isEmpty())
+            return;
         consumer.accept(tacticalHudMap.values().iterator().next());
     }
 
