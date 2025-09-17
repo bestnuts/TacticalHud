@@ -1,7 +1,6 @@
 package me.bestnuts.th;
 
 import me.bestnuts.th.handlers.TacticalHandler;
-import me.bestnuts.th.hud.HudEntity;
 import me.bestnuts.th.listeners.PlayerListener;
 import me.bestnuts.th.player.TacticalPlayer;
 import org.bukkit.Bukkit;
