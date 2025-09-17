@@ -18,6 +18,14 @@ public class HudEntity {
         this.player = ((CraftPlayer) tacticalPlayer.getPlayer()).getHandle();
     }
 
+    public ServerPlayer getPlayer() {
+        return player;
+    }
+
+    public Entity getEntity() {
+        return entity;
+    }
+
     public Player getBukkitPlayer() {
         return player.getBukkitEntity().getPlayer();
     }

@@ -1,14 +1,41 @@
 package me.bestnuts.th.hud;
 
-public class HudObject {
+import me.bestnuts.th.TacticalHudPlugin;
+import me.bestnuts.th.handlers.EntityHandler;
 
-    private final HudComponent hudComponent;
-    private final HudTransform hudTransform;
-    private final HudEntity hudEntity;
+public record HudObject(HudComponent hudComponent, HudTransform hudTransform, HudEntity hudEntity) {
 
     public HudObject(HudComponent hudComponent, HudTransform hudTransform, HudEntity hudEntity) {
         this.hudComponent = hudComponent;
         this.hudTransform = hudTransform;
         this.hudEntity = hudEntity;
+        create();
+    }
+
+    private void create() {
+        EntityHandler handler = TacticalHudPlugin.getInstance().getTacticalHandler().getEntityHandler();
+        if (hudEntity.isEntityInValid()) {
+            hudEntity.createEntity();
+            handler.mountEntityOnPlayer(hudEntity.getPlayer(), hudEntity.getEntity());
+            handler.sendAddEntity(hudEntity.getPlayer(), hudEntity.getEntity());
+        }
+        modifyAll();
+    }
+
+    public void modifyAll() {
+        EntityHandler handler = TacticalHudPlugin.getInstance().getTacticalHandler().getEntityHandler();
+
+        modifyComponent();
+        modifyTransform();
+
+        handler.updateEntityData(hudEntity.getPlayer(), hudEntity.getEntity());
+    }
+
+    public void modifyComponent() {
+        hudComponent.modify(hudEntity.getBukkitEntity());
+    }
+
+    public void modifyTransform() {
+        hudTransform.modify(hudEntity.getBukkitEntity());
     }
 }

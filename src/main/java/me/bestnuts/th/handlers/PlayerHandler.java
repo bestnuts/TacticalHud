@@ -1,9 +1,7 @@
 package me.bestnuts.th.handlers;
 
 import me.bestnuts.th.TacticalHudPlugin;
-import me.bestnuts.th.hud.HudComponent;
-import me.bestnuts.th.hud.HudTransform;
-import me.bestnuts.th.hud.TacticalHud;
+import me.bestnuts.th.hud.*;
 import me.bestnuts.th.player.TacticalPlayer;
 import me.bestnuts.th.util.YamlConfigurationFactory;
 import org.bukkit.Color;
@@ -19,6 +17,10 @@ import org.joml.Vector3f;
 import java.util.List;
 
 public class PlayerHandler {
+
+    public void createHud(@NotNull TacticalPlayer tacticalPlayer) {
+        createHud(tacticalPlayer, YamlConfigurationFactory.getConfiguration("hud/default-hud"));
+    }
 
     public void createHud(@NotNull TacticalPlayer tacticalPlayer, @NotNull FileConfiguration configuration) {
         ConfigurationSection section = configuration.getConfigurationSection("hud");
@@ -93,6 +95,8 @@ public class PlayerHandler {
             );
         }
 
-        return new TacticalHud(tacticalPlayer, interval, condition, component, transform);
+        return new TacticalHud(interval, condition,
+                new HudObject(component, transform, new HudEntity(tacticalPlayer))
+                );
     }
 }

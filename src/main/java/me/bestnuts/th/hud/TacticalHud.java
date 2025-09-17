@@ -1,30 +1,30 @@
 package me.bestnuts.th.hud;
 
-import me.bestnuts.th.player.TacticalPlayer;
+import me.bestnuts.th.util.ConditionParser;
 
 public class TacticalHud {
-
-    private final TacticalPlayer tacticalPlayer;
 
     private final int interval;
     private final String condition;
 
-    private final HudEntity hudEntity;
-    private final HudComponent component;
-    private final HudTransform transform;
+    private final HudObject hudObject;
 
-    public TacticalHud(TacticalPlayer tacticalPlayer, int interval, String condition, HudComponent component, HudTransform transform) {
-        this.tacticalPlayer = tacticalPlayer;
+    private int tick;
+
+    public TacticalHud(int interval, String condition, HudObject hudObject) {
         this.interval = interval;
         this.condition = condition;
 
-        this.hudEntity = new HudEntity(tacticalPlayer);
-        this.component = component;
-        this.transform = transform;
+        this.hudObject = hudObject;
     }
 
-    public TacticalPlayer getTacticalPlayer() {
-        return tacticalPlayer;
+    public void update() {
+        tick -= 1;
+        if (tick <= 0) {
+            tick = interval;
+            if (ConditionParser.parsing(condition))
+                hudObject.modifyComponent();
+        }
     }
 
     public int getInterval() {
@@ -35,15 +35,7 @@ public class TacticalHud {
         return condition;
     }
 
-    public HudEntity getHudEntity() {
-        return hudEntity;
-    }
-
-    public HudComponent getComponent() {
-        return component;
-    }
-
-    public HudTransform getTransform() {
-        return transform;
+    public HudObject getHudObject() {
+        return hudObject;
     }
 }

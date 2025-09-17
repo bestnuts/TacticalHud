@@ -13,4 +13,8 @@ public class YamlConfigurationFactory {
         File file = new File(TacticalHudPlugin.getInstance().getDataFolder() + "/" + path + ".yml");
         return YamlConfiguration.loadConfiguration(file);
     }
+
+    public static @NotNull FileConfiguration getConfiguration() {
+        return TacticalHudPlugin.getInstance().getConfig();
+    }
 }
