@@ -18,6 +18,7 @@ public final class TacticalHudPlugin extends JavaPlugin {
     private static TacticalHudPlugin plugin;
     TacticalHandler tacticalHandler;
     Map<Player, TacticalPlayer> tacticalPlayerMap;
+    boolean enablePlaceHolderAPI;
 
     public @NotNull Logger getLogger() {
         return super.getLogger();
@@ -50,9 +51,11 @@ public final class TacticalHudPlugin extends JavaPlugin {
     }
 
     private void checkEnableAPI() {
-        if (Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {
+        enablePlaceHolderAPI = Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI");
+    }
 
-        }
+    public boolean isEnablePlaceHolderAPI() {
+        return enablePlaceHolderAPI;
     }
 
     public TacticalHandler getTacticalHandler() {
