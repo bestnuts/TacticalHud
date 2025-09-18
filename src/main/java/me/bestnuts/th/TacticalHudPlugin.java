@@ -39,7 +39,7 @@ public final class TacticalHudPlugin extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        HandlerList.unregisterAll(this);
+            HandlerList.unregisterAll(this);
 
         for (TacticalPlayer tacticalPlayer : tacticalPlayerMap.values()) {
             tacticalPlayer.hudUpdate(t -> t.getHudObject().remove());

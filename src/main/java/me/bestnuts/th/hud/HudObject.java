@@ -5,14 +5,12 @@ import me.bestnuts.th.handlers.EntityHandler;
 
 public record HudObject(HudComponent hudComponent, HudTransform hudTransform, HudEntity hudEntity) {
 
-    public HudObject(HudComponent hudComponent, HudTransform hudTransform, HudEntity hudEntity) {
-        this.hudComponent = hudComponent;
-        this.hudTransform = hudTransform;
-        this.hudEntity = hudEntity;
-        create();
+    private void update() {
+        EntityHandler handler = TacticalHudPlugin.getInstance().getTacticalHandler().getEntityHandler();
+        handler.updateEntityData(hudEntity.getPlayer(), hudEntity.getEntity());
     }
 
-    private void create() {
+    public void create() {
         EntityHandler handler = TacticalHudPlugin.getInstance().getTacticalHandler().getEntityHandler();
         if (hudEntity.isEntityInValid()) {
             hudEntity.createEntity();
@@ -30,12 +28,8 @@ public record HudObject(HudComponent hudComponent, HudTransform hudTransform, Hu
     }
 
     public void modifyAll() {
-        EntityHandler handler = TacticalHudPlugin.getInstance().getTacticalHandler().getEntityHandler();
-
         modifyComponent();
         modifyTransform();
-
-        handler.updateEntityData(hudEntity.getPlayer(), hudEntity.getEntity());
     }
 
     public void mount() {
@@ -45,9 +39,11 @@ public record HudObject(HudComponent hudComponent, HudTransform hudTransform, Hu
 
     public void modifyComponent() {
         hudComponent.modify(hudEntity.getBukkitEntity(), hudEntity.getBukkitPlayer());
+        update();
     }
 
     public void modifyTransform() {
         hudTransform.modify(hudEntity.getBukkitEntity());
+        update();
     }
 }
