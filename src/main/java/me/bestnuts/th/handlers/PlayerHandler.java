@@ -4,6 +4,7 @@ import me.bestnuts.th.TacticalHudPlugin;
 import me.bestnuts.th.exceptions.NotFoundSubSectionElement;
 import me.bestnuts.th.hud.*;
 import me.bestnuts.th.player.TacticalPlayer;
+import me.bestnuts.th.util.JomlFactory;
 import me.bestnuts.th.util.YamlConfigurationFactory;
 import org.bukkit.Color;
 import org.bukkit.configuration.ConfigurationSection;
@@ -89,11 +90,11 @@ public class PlayerHandler {
             List<Float> rightRotationList = transformSection.getFloatList("rightRotation");
             List<Float> rawRotationList = transformSection.getFloatList("rawRotation");
             transform = new HudTransform(
-                    new Vector3f(transformList.get(0), transformList.get(1), transformList.get(2)),
-                    new Vector3f(scaleList.get(0), scaleList.get(1), scaleList.get(2)),
-                    new AxisAngle4f(leftRotationList.get(0), leftRotationList.get(1), leftRotationList.get(2), leftRotationList.get(3)),
-                    new AxisAngle4f(rightRotationList.get(0), rightRotationList.get(1), rightRotationList.get(2), rightRotationList.get(3)),
-                    new Vector2f(rawRotationList.get(0), rawRotationList.get(1))
+                    JomlFactory.getVector3f(transformList),
+                    JomlFactory.getVector3f(scaleList),
+                    JomlFactory.getAxisAngle4f(leftRotationList),
+                    JomlFactory.getAxisAngle4f(rightRotationList),
+                    JomlFactory.getVector2f(rawRotationList)
             );
         }
 
