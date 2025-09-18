@@ -16,9 +16,9 @@ public class EntityHandler {
         player.connection.send(new ClientboundAddEntityPacket(
                 entity.getId(),
                 entity.getUUID(),
-                entity.getX(),
-                entity.getY(),
-                entity.getZ(),
+                player.getX(),
+                player.getY(),
+                player.getZ(),
                 entity.getXRot(),
                 entity.getYRot(),
                 entity.getType(),
