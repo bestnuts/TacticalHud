@@ -1,7 +1,7 @@
 package me.bestnuts.th.hud;
 
 import me.bestnuts.th.player.TacticalPlayer;
-import me.bestnuts.th.util.ConditionParser;
+import me.bestnuts.th.utils.ConditionParser;
 
 public class TacticalHud {
 

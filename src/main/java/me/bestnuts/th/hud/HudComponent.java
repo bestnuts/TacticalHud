@@ -1,6 +1,6 @@
 package me.bestnuts.th.hud;
 
-import me.bestnuts.th.util.ComponentFactory;
+import me.bestnuts.th.utils.ComponentFactory;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Color;
 import org.bukkit.NamespacedKey;

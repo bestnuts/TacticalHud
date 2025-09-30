@@ -2,7 +2,7 @@ package me.bestnuts.th.player;
 
 import me.bestnuts.th.TacticalHudPlugin;
 import me.bestnuts.th.hud.TacticalHud;
-import me.bestnuts.th.util.YamlConfigurationFactory;
+import me.bestnuts.th.utils.YamlConfigurationFactory;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 

@@ -1,4 +1,4 @@
-package me.bestnuts.th.util;
+package me.bestnuts.th.utils;
 
 import org.joml.AxisAngle4f;
 import org.joml.Vector2f;

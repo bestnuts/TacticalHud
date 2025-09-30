@@ -1,4 +1,4 @@
-package me.bestnuts.th.util;
+package me.bestnuts.th.utils;
 
 import me.bestnuts.th.TacticalHudPlugin;
 import me.clip.placeholderapi.PlaceholderAPI;
