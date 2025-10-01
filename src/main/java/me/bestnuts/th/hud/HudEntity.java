@@ -4,9 +4,10 @@ import me.bestnuts.th.player.TacticalPlayer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import org.bukkit.craftbukkit.entity.CraftPlayer;
+import org.bukkit.entity.Display;
 import org.bukkit.entity.Player;
 
-public abstract class HudEntity<T> {
+public abstract class HudEntity<T extends Display> {
 
     private final ServerPlayer player;
     private Entity entity;
