@@ -43,7 +43,9 @@ public class TacticalPlayer extends BukkitRunnable {
     public void hudUpdate(Consumer<TacticalHud> consumer) {
         if (tacticalHudMap.isEmpty())
             return;
-        consumer.accept(tacticalHudMap.values().iterator().next());
+        for (TacticalHud tacticalHud : tacticalHudMap.values()) {
+            consumer.accept(tacticalHud);
+        }
     }
 
     public Player getPlayer() {
