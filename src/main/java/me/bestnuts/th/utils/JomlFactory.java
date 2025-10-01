@@ -21,7 +21,7 @@ public class JomlFactory {
     }
 
     public static AxisAngle4f getAxisAngle4f(List<Float> list) {
-        if (list == null || list.isEmpty() || list.size() < 3)
+        if (list == null || list.isEmpty() || list.size() < 4)
             return new AxisAngle4f();
         return new AxisAngle4f(list.get(0), list.get(1), list.get(2), list.get(3));
     }
