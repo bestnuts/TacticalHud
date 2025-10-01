@@ -1,6 +1,6 @@
 package me.bestnuts.th.hud;
 
-import org.bukkit.entity.TextDisplay;
+import org.bukkit.entity.Display;
 import org.bukkit.util.Transformation;
 import org.jetbrains.annotations.NotNull;
 import org.joml.AxisAngle4f;
@@ -14,7 +14,7 @@ public record HudTransform (
         @NotNull AxisAngle4f rightRotation,
         @NotNull Vector2f rawRotation
 ) {
-    public void modify(TextDisplay display) {
+    public void modify(Display display) {
         display.setTransformation(
                 new Transformation(
                         transform,

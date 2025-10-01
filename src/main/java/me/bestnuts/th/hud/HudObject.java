@@ -2,8 +2,9 @@ package me.bestnuts.th.hud;
 
 import me.bestnuts.th.TacticalHudPlugin;
 import me.bestnuts.th.handlers.EntityHandler;
+import org.bukkit.entity.Display;
 
-public record HudObject(HudComponent hudComponent, HudTransform hudTransform, HudEntity hudEntity) {
+public record HudObject(HudTransform hudTransform, HudEntity<? extends Display> hudEntity) {
 
     private void update() {
         EntityHandler handler = TacticalHudPlugin.getInstance().getTacticalHandler().getEntityHandler();
@@ -38,7 +39,7 @@ public record HudObject(HudComponent hudComponent, HudTransform hudTransform, Hu
     }
 
     public void modifyComponent() {
-        hudComponent.modify(hudEntity.getBukkitEntity(), hudEntity.getBukkitPlayer());
+        hudEntity.modifyEntity();
         update();
     }
 

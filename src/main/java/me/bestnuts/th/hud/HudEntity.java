@@ -3,13 +3,10 @@ package me.bestnuts.th.hud;
 import me.bestnuts.th.player.TacticalPlayer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntitySpawnReason;
-import net.minecraft.world.entity.EntityType;
 import org.bukkit.craftbukkit.entity.CraftPlayer;
 import org.bukkit.entity.Player;
-import org.bukkit.entity.TextDisplay;
 
-public class HudEntity {
+public abstract class HudEntity<T> {
 
     private final ServerPlayer player;
     private Entity entity;
@@ -22,6 +19,10 @@ public class HudEntity {
         return player;
     }
 
+    public void setEntity(Entity entity) {
+        this.entity = entity;
+    }
+
     public Entity getEntity() {
         return entity;
     }
@@ -30,15 +31,13 @@ public class HudEntity {
         return player.getBukkitEntity().getPlayer();
     }
 
-    public TextDisplay getBukkitEntity() {
-        return (TextDisplay) entity.getBukkitEntity();
-    }
-
     public boolean isEntityInValid() {
         return entity == null || entity.isRemoved();
     }
 
-    public void createEntity() {
-        entity = EntityType.TEXT_DISPLAY.create(player.level(), EntitySpawnReason.COMMAND);
-    }
+    public abstract T getBukkitEntity();
+
+    public abstract void createEntity();
+
+    public abstract void modifyEntity();
 }
