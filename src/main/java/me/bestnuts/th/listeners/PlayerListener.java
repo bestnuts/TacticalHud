@@ -27,7 +27,8 @@ public class PlayerListener implements Listener {
     public void onPlayerTeleport(PlayerTeleportEvent event) {
         Player player = event.getPlayer();
         TacticalPlayer tacticalPlayer = TacticalHudPlugin.getTacticalPlayer(player);
-        tacticalPlayer.hudUpdate(TacticalHud::forceUpdate);
+        tacticalPlayer.hudUpdate(tacticalHud -> tacticalHud.getHudObject().remove());
+        tacticalPlayer.hudUpdate(TacticalHud::update);
     }
 
     @EventHandler
