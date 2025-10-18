@@ -34,20 +34,20 @@ public class PlayerListener implements Listener {
     public void onPlayerWorldChange(PlayerChangedWorldEvent event) {
         Player player = event.getPlayer();
         TacticalPlayer  tacticalPlayer = TacticalHudPlugin.getTacticalPlayer(player);
-        tacticalPlayer.hudUpdate(TacticalHud::forceUpdate);
+        tacticalPlayer.hudUpdate(TacticalHud::update);
     }
 
     @EventHandler
     public void onPlayerRespawn(PlayerRespawnEvent event) {
         Player player = event.getPlayer();
         TacticalPlayer tacticalPlayer = TacticalHudPlugin.getTacticalPlayer(player);
-        tacticalPlayer.hudUpdate(TacticalHud::forceUpdate);
+        tacticalPlayer.hudUpdate(TacticalHud::update);
     }
 
     @EventHandler
     public void onPlayerDeath(PlayerDeathEvent event) {
         Player player = event.getEntity();
         TacticalPlayer tacticalPlayer = TacticalHudPlugin.getTacticalPlayer(player);
-        tacticalPlayer.hudUpdate(TacticalHud::forceUpdate);
+        tacticalPlayer.hudUpdate(tacticalHud -> tacticalHud.getHudObject().remove());
     }
 }
