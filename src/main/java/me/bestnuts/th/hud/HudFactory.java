@@ -5,8 +5,7 @@ import me.bestnuts.th.hud.entity.HudBlock;
 import me.bestnuts.th.hud.entity.HudItem;
 import me.bestnuts.th.hud.entity.HudText;
 import me.bestnuts.th.player.TacticalPlayer;
-import me.bestnuts.th.utils.JomlFactory;
-import org.bukkit.Color;
+import me.bestnuts.th.utils.DimensionFactory;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -52,11 +51,11 @@ public class HudFactory {
             List<Float> rightRotationList = transformSection.getFloatList("rightRotation");
             List<Float> rawRotationList = transformSection.getFloatList("rawRotation");
             transform = new HudTransform(
-                    JomlFactory.getVector3f(transformList),
-                    JomlFactory.getVector3f(scaleList),
-                    JomlFactory.getAxisAngle4f(leftRotationList),
-                    JomlFactory.getAxisAngle4f(rightRotationList),
-                    JomlFactory.getVector2f(rawRotationList)
+                    DimensionFactory.getVector3f(transformList),
+                    DimensionFactory.getVector3f(scaleList),
+                    DimensionFactory.getAxisAngle4f(leftRotationList),
+                    DimensionFactory.getAxisAngle4f(rightRotationList),
+                    DimensionFactory.getVector2f(rawRotationList)
             );
         }
 
@@ -93,10 +92,9 @@ public class HudFactory {
             @Override
             public HudEntity<TextDisplay> create(TacticalPlayer tacticalPlayer, ConfigurationSection component) {
                 List<Integer> colorList = component.getIntegerList("backgroundColor");
-                if (colorList.size() != 4) colorList = List.of(0, 0, 0, 0);
                 HudText.HudComponent hudComponent = new HudText.HudComponent(
                         TextDisplay.TextAlignment.valueOf(component.getString("alignment", "CENTER").toUpperCase()),
-                        Color.fromARGB(colorList.get(0), colorList.get(1), colorList.get(2), colorList.get(3)),
+                        DimensionFactory.getARGB(colorList),
                         component.getString("text", ""),
                         component.getString("font", "minecraft:default"),
                         component.getInt("lineWidth", 0),
